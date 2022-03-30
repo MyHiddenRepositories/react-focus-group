@@ -1,4 +1,4 @@
-# Hoisting
+# **Hoisting**
 
 > JavaScript **Hoisting** refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code.
 
@@ -14,11 +14,73 @@ Thus, variables can appear in code before they are even defined. However, the va
     }
 ```
 
+## **Execution Context**
+
+When a Javascript engine executes code, it creates execution context. Each context has two phases: creation and execution.
+
+### **Creation Phase**
+
+When a script executes, the JS engine creates a **Global Execution Context**. In this phase, it performs the following tasks:
+
+- Create a global object ```window``` in the web browser or ```global``` in Node.js.
+- Create the ```this``` object and bind it to the global object.
+- Setup a memory heap for storing variables and function references.
+- Store the function declarations in the memory heap and variables within the global execution context with the initial values as ```undefined```.
+
+### **Execution Phase**
+At this phase, the JS engine executes the code line by line. But by virtue of hoisting, the function is declared regardless of line order, so there is no problem calling/invoking the method prior the declaration.
+
+For every function call, the JS engine creates a new **Function Execution Context**. This context is similar to **global execution context**, but instead of creating the global object, it creates the ```arguments``` object that contains references to all the parameters passed to the function
+
+<br />
+<br />
+
+## **Execution of the code**
+<br />
+
+```js
+var a = 2;
+var b = 4;
+
+var sum = a + b;
+
+console.log(sum);
+```
+
+**Creation Phase**
+![Creation Phase](./assets/1.gif)
+**Execution Phase**
+![Execution Phase](./assets/2.gif)
+
+```js
+var n = 2;
+
+function square(num) {
+ var ans = num * num;
+ return ans;
+}
+
+var square2 = square(n);
+var square4 = square(4);
+```
+
+**Creation Phase**
+![Creation Phase](./assets/3.gif)
+**Execution Phase**
+![Execution Phase](./assets/4.gif)
+![Execution Phase](./assets/5.gif)
+![Execution Phase](./assets/6.gif)
+![Execution Phase](./assets/7.gif)
+
+<br />
+<br />
+
 > Only the declarations (function and variable) are hoisted
 
 <br />
 
 JS only hoists declarations, **not initializations**. If a variable is used but it is only declared and initialized after, the value when it is used will be the default value on initialization.
+
 
 <br />
 
