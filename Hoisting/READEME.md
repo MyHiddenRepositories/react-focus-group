@@ -53,8 +53,6 @@ a ```ReferenceError``` exception would be thrown because no hoisting happened.
 
 ## **Hoisting functions**
 
----
-
 JavaScript functions can be loosely classified as the following:
 
 1. Function declarations
