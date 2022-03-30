@@ -29,7 +29,7 @@ For variables declared with the ```var``` keyword, the default value would be ``
     var test; // Declaration
     test = 2022; // Initialization
 ```
-<center>OR</center>
+<p align='center'>OR</p>
 <br />
 
 ```js
@@ -89,7 +89,7 @@ We’ll investigate how hoisting is affected by both function types.
     }
 ```
 
-<center>OR</center>
+<p align='center'>OR</p>
 <br />
 
 ```js
