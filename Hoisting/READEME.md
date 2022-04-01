@@ -75,9 +75,13 @@ var square4 = square(4);
 <br />
 <br />
 
+
 > Only the declarations (function and variable) are hoisted
 
 <br />
+<br />
+
+## **Variable hoisting**
 
 JS only hoists declarations, **not initializations**. If a variable is used but it is only declared and initialized after, the value when it is used will be the default value on initialization.
 
@@ -110,10 +114,20 @@ Logging the ```test``` variable before it is initialized would print ```undefine
 
 a ```ReferenceError``` exception would be thrown because no hoisting happened.
 
+<br />
+
+> ```strict mode``` does not allow undeclared variables.
+
+```js
+    'use strict';
+
+    test = 2022; // ReferenceError: test is not defined
+```
+
 
 <br />
 
-## **Hoisting functions**
+## **Function hoisting**
 
 JavaScript functions can be loosely classified as the following:
 
@@ -159,4 +173,129 @@ We’ll investigate how hoisting is affected by both function types.
     var func = function test() {
         console.log('JS')
     }
+```
+
+<br />
+
+## **Order of precedence**
+
+There are two rules you have to keep in mind when working with hoisted functions and 
+variables:
+
+It’s important to keep a few things in mind when declaring JavaScript functions and variables.
+
+- Variable assignment takes precedence over function declaration
+- Function declarations take precedence over variable declarations
+
+> Function declarations are hoisted over variable declarations but not over variable assignments.
+
+Let’s take a look at what implications this behaviour has.
+
+<br />
+
+**Variable assignment over function declaration**
+
+```js
+    var double = 22;
+
+    function double(num) {
+        return (num*2);
+    }
+
+    console.log(double); // 22
+```
+
+<br />
+
+**Function declarations over variable declarations**
+
+```js
+    var double;
+
+    function double(num) {
+        return (num*2);
+    }
+
+    console.log(double); // function double(num) {...}
+```
+<p align='center'>OR</p>
+
+```js
+    function double(num) {
+        return (num*2);
+    }
+
+    var double;
+
+    console.log(double); // function double(num) {...}
+```
+
+Even if we reversed the position of the declarations, the JavaScript interpreter would still consider ```double``` a function.
+
+<br />
+
+## **Temporal Dead Zone (TDZ)**
+
+Variables declared with ```let``` and ```const``` are also hoisted. However, unlike variables declared with ```var```, they are not initialized to a default value of ```undefined```. Until the line in which they are initialized is executed, any code that access them, will throw an exception. These variables are said to be in a "temporal dead zone" (TDZ) from the start of the block until the initialization has completed. Accessing unintialized ```let``` variables would result to a ```ReferenceError```.
+
+```js
+{ 
+    // TDZ starts at beginning of scope
+    console.log(varVariable); // undefined
+    console.log(letVariable); // ReferenceError: Cannot access 'letVariable' before initialization"
+
+    var varVariable = 1;
+    let letVariable = 2; // End of TDZ (for letVariable)
+}
+```
+
+The term "temporal" is used because the zone depends on the execution order (referring to time - temporal) rather than the order in which the code is written (position). However, the code snippet below will work because even though ```func``` uses the ```letVariable``` before it is declared, the function is called outside of the TDZ.
+
+```js
+{
+    // TDZ starts at beginning of scope
+    const func = () => console.log(letVariable); // 2022
+
+    // Within the TDZ letVariable access throws `ReferenceError`
+
+    let letVariable = 2022; // End of TDZ (for letVariable)
+    func(); // Called outside TDZ!
+}
+```
+
+## **Class hoisting**
+
+JavaScript classes too can be loosely classified either as:
+
+- Class declarations
+- Class expressions
+
+### **Class declarations**
+
+Much like their function counterparts, JavaScript class declarations are hoisted. However, they remain uninitialised until evaluation. This effectively means that you have to declare a class before you can use it.
+
+```js
+    console.log(Test); // ReferenceError: Cannot access 'Test' before initialization"
+
+    class Test {}
+```
+
+### **Class expressions**
+
+```js
+    console.log(Test); // undefined
+
+    var Test = class Test {}
+```
+
+```js
+    console.log(Test); // undefined
+
+    var Test = class {}
+```
+
+```js
+    console.log(Test); // ReferenceError: Cannot access 'Test' before initialization"
+
+    const Test = class {}
 ```
