@@ -15,6 +15,8 @@ Thus, variables can appear in code before they are even defined. However, the va
     }
 ```
 
+<br />
+
 ## **Execution Context**
 
 When a Javascript engine executes code, it creates execution context. Each context has two phases: creation and execution.
@@ -79,7 +81,6 @@ var square4 = square(4);
 
 > Only the declarations (function and variable) are hoisted
 
-<br />
 <br />
 
 ## **Variable hoisting**
@@ -266,6 +267,8 @@ The term "temporal" is used because the zone depends on the execution order (ref
 }
 ```
 
+<br />
+
 ## **Class hoisting**
 
 JavaScript classes too can be loosely classified either as:
@@ -303,4 +306,116 @@ Class expressions, similar to function expressions, are assigned to variables; h
     console.log(Test); // ReferenceError: Cannot access 'Test' before initialization"
 
     const Test = class {}
+```
+
+<br />
+
+## **Examples**
+
+```js
+  console.log(test) // undefined
+  if (false) {
+    var test = 2022;
+  }
+  console.log(test) // undefined
+```
+
+```js
+  console.log(test) // undefined
+  if (true) {
+    var test = 2022;
+  }
+  console.log(test) // 2022
+```
+
+```js
+  console.log(test) // ReferenceError: test is not defined"
+  test = 2022;
+```
+
+```js
+  'use strict';
+  test = 2022; // ReferenceError: test is not defined"
+  console.log(test)
+```
+
+```js
+  console.log(func) // undefined
+  if (true) {
+    var func = function test() {
+      console.log(test) // function test() {...}
+    }
+    console.log(test) // ReferenceError: test is not defined"
+  }
+  console.log(func) // function test() {...}
+```
+
+```js
+  console.log(test) // undefined or function test() {...} in old browsers. For example in IE10
+  if (false) {
+    function test() { }
+  }
+  console.log(test) // undefined or function test() {...} in old browsers. For example in IE10
+```
+
+```js
+  console.log(test) // undefined or function test() {...} in old browsers. For example in IE10
+  if (true) {
+    console.log(test) // function test() {...}
+    function test() { }
+  }
+  console.log(test) // function test() {...}
+```
+
+```js
+  func()
+
+  console.log(test) // ReferenceError: test is not defined"
+  function func() {
+    console.log(test) // undefined
+    var test = 2022;
+  }
+```
+
+```js
+  console.log(test) // ReferenceError: test is not defined"
+  if (true) {
+    console.log(test) // ReferenceError: Cannot access 'test' before initialization"
+    let test = 2022;
+  }
+  console.log(test) // ReferenceError: test is not defined"
+```
+
+```js
+  console.log(test) // ReferenceError: test is not defined"
+  if (true) {
+    console.log(test) // ReferenceError: Cannot access 'test' before initialization"
+    const test = 2022;
+  }
+  console.log(test) // ReferenceError: test is not defined"
+```
+
+```js
+  console.log(test) // undefined
+  var test = 2022;
+  console.log(test) // 2022
+  var test = 'JS';
+  console.log(test) // JS
+```
+
+```js
+  // SyntaxError: Identifier 'test' has already been declared"
+
+  console.log(test)
+  let test = 2022;
+  console.log(test)
+  let test = 'JS';
+  console.log(test)
+```
+
+```js
+  // SyntaxError: Missing initializer in const declaration"
+
+  console.log(test)
+  const test;
 ```
