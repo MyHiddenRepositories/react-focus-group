@@ -1,5 +1,6 @@
 # **Hoisting**
 
+## **What Is Hoisting?**
 > JavaScript **Hoisting** refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code.
 
 <br />
@@ -35,7 +36,7 @@ For every function call, the JS engine creates a new **Function Execution Contex
 <br />
 <br />
 
-## **Execution of the code**
+### **Execution of the code**
 <br />
 
 ```js
@@ -116,7 +117,9 @@ a ```ReferenceError``` exception would be thrown because no hoisting happened.
 
 <br />
 
-> ```strict mode``` does not allow undeclared variables.
+## **Strict Mode**
+
+```strict mode``` does not allow undeclared variables.
 
 ```js
     'use strict';
@@ -272,7 +275,7 @@ JavaScript classes too can be loosely classified either as:
 
 ### **Class declarations**
 
-Much like their function counterparts, JavaScript class declarations are hoisted. However, they remain uninitialised until evaluation. This effectively means that you have to declare a class before you can use it.
+JavaScript class declarations get hoisted during compile-time, but they don't get initialized with any value. These declarations behave similar to what we observed with hoisted ```const``` and ```let``` variable declarations. Even though JavaScript manages to find a reference for the class we created, we can not use it before it’s actually defined in the code.
 
 ```js
     console.log(Test); // ReferenceError: Cannot access 'Test' before initialization"
@@ -281,6 +284,8 @@ Much like their function counterparts, JavaScript class declarations are hoisted
 ```
 
 ### **Class expressions**
+
+Class expressions, similar to function expressions, are assigned to variables; hence only the variable declarations get hoisted. Therefore we can not use class expressions before they are defined.
 
 ```js
     console.log(Test); // undefined
