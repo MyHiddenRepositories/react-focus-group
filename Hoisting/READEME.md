@@ -368,6 +368,42 @@ Class expressions, similar to function expressions, are assigned to variables; h
 ```
 
 ```js
+  console.log(test()) // Second
+
+  function test() {
+    return 'First'
+  }
+
+  console.log(test()) // Second
+
+  function test() {
+    return 'Second'
+  }
+
+  console.log(test()) // Second
+```
+
+```js
+  console.log(test()) // Second
+
+  if (true) {
+    console.log(test()) // First or Second in old browsers. For example in IE10
+
+    function test() {
+      return 'First'
+    }
+  }
+
+  console.log(test()) // First or Second in old browsers. For example in IE10
+
+  function test() {
+    return 'Second'
+  }
+
+  console.log(test()) // First or Second in old browsers. For example in IE10
+```
+
+```js
   func()
 
   console.log(test) // ReferenceError: test is not defined"
@@ -419,3 +455,14 @@ Class expressions, similar to function expressions, are assigned to variables; h
   console.log(test)
   const test;
 ```
+
+## **Summary**
+- **Hoisting** refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code.
+- Only the declarations (function and variable) are hoisted.
+- For variables declared with the ```var``` keyword, the default value would be ```undefined```.
+- ```strict mode``` does not allow undeclared variables.
+- Variables declared with ```let``` and ```const``` are also hoisted. However, unlike variables declared with ```var```, they are not initialized to a default value of ```undefined```.
+- Class declarations get hoisted during compile-time, but they don't get initialized with any value. These declarations behave similar to what we observed with hoisted ```const``` and ```let``` variable declarations.
+- Variable assignment takes precedence over function declaration.
+- Function declarations take precedence over variable declarations.
+- ```let``` and ```const```. Redeclaring the same variable within the same function or block scope raises a SyntaxError.
