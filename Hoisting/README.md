@@ -51,8 +51,12 @@ console.log(sum);
 ```
 
 **Creation Phase**
+<br />
+
 ![Creation Phase](./assets/1.gif)
+
 **Execution Phase**
+<br/>
 ![Execution Phase](./assets/2.gif)
 
 ```js
@@ -68,8 +72,13 @@ var square4 = square(4);
 ```
 
 **Creation Phase**
+<br />
+
 ![Creation Phase](./assets/3.gif)
+
 **Execution Phase**
+<br />
+
 ![Execution Phase](./assets/4.gif)
 ![Execution Phase](./assets/5.gif)
 ![Execution Phase](./assets/6.gif)
